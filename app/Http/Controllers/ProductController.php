@@ -63,15 +63,16 @@ class ProductController extends Controller
             $image_path = "";
             if($request->file('product_image'))
             {
-                  $image_path = $request->file('product_image')->store('public');
+                  $image = $request->file('product_image')->store('public');
+                  $image_name = explode("/", $image)[1];
+                  $image_path = "http://".$_SERVER['HTTP_HOST']."/storage/". $image_name;
             }
 
-            $image_name = explode("/", $image_path)[1];
             $product = new Product();
             $product->category_id = $request->category_name;
             $product->product_name = $request->product_name;
             $product->product_price = $request->product_price;
-            $product->product_image = "http://".$_SERVER['HTTP_HOST']."/storage/". $image_name;
+            $product->product_image =  $image_path;
             $product->save();
             return response()->json(['success' => 'Product inserted successfully']);
         }
@@ -79,7 +80,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        //
+        
     }
 
     public function edit($id)
@@ -89,17 +90,57 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'category_name' => 'required',
+            'product_name' => 'required|min:3',
+            'product_price' => 'required',
+            'product_image' => 'image|mimes:jpeg,png,jpg',
+        ]);
+        if($validator->fails())
+        {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+        else{
+            $image_path = $request->prev_image;
+            if($request->file('product_image'))
+            {
+                if($image_path)
+                {
+                    $image_name = explode('/',   $image_path)[4];
+                    Storage::delete("public/".$image_name);
+                }
+                  $image = $request->file('product_image')->store('public');
+                  $image_name = explode("/", $image)[1];
+                  $image_path = "http://".$_SERVER['HTTP_HOST']."/storage/". $image_name;
+            }
+
+            $product = Product::findOrFail($id);
+            $product->category_id = $request->category_name;
+            $product->product_name = $request->product_name;
+            $product->product_price = $request->product_price;
+            $product->product_image =  $image_path;
+            $product->save();
+            return response()->json(['success' => 'Product updated successfully']);
+        }
     }
 
     public function destroy($id)
     {
-        Product::findOrFail($id)->delete();
+        $product = Product::findOrFail($id);
+        $product_image = $product->product_image;
+        if($product_image)
+        {
+            $image_name = explode('/', $product_image)[4];
+            Storage::delete("public/".$image_name);
+        }
+        $product->delete();
         return response()->json(['success' => 'Product has been deleted']);
     }
 
-    public function getCategoryName()
+    public function getCategoryWithProducts()
     {
-     
+        $categories = Category::all();
+        $products = Product::all();
+        return view('user.home', compact('categories', 'products'));
     }
 }

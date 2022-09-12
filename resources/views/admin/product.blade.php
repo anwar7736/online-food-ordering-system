@@ -64,6 +64,7 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success saveBtn"></button>
                     <input type="hidden" id="hiddenID" >
+                    <input type="hidden" id="prev_image" value="" name="prev_image">
                     <button type="button" class="btn btn-danger closeBtn" data-dismiss="modal">Close</button>
                 </div>  
             </form>
@@ -92,7 +93,7 @@
             $(document).on('click', '.delete', function(){
                 let id = $(this).data('id');
                 swal({
-                        title: `Do you want to delete this record?`,
+                        title: `Do you want to delete this product?`,
                         text: "If you delete this, it will be gone forever.",
                         icon: "warning",
                         buttons: true,
@@ -122,7 +123,11 @@
             $("#addBtn").click(function(){
                 $("#productModal").modal('show');
                 $("#category_name").val("");
+                $("#product_name").val("");
+                $("#product_price").val("");
                 $("#hiddenID").val("");
+                $("#prev_image").val("");
+                $("#product_image").val("");
                 $(".saveBtn").text('Save');
                 $(".modal-title").text('Add New Product');
                 $(".old_image").addClass('d-none');
@@ -144,6 +149,7 @@
                     method : "POST",
                     data : new FormData(this),
                     dataType : "JSON",
+                    cache : false,
                     contentType: false,
                     processData: false,
                     success : function(data)
@@ -173,6 +179,8 @@
                                 setTimeout(()=>{
                                     $("#productModal").modal('hide');
                                     $("#form_result").html("");
+                                    $("#prev_image").val("");
+                                    $("#product_image").val("");
                                 },1000);
                              }
                              $("#product_table").DataTable().ajax.reload();
@@ -185,12 +193,15 @@
             $(".closeBtn").click(function(){
                 $("#form_result").html("");
                 $("#hiddenID").val("");
+                $("#prev_image").val("");
+                $("#product_image").val("");
             });
             $(document).on('click', '.edit', function(){
                 let id = $(this).data('id');
                 $(".old_image").removeClass('d-none');
                 $(".saveBtn").text('Update');
                 $("#hiddenID").val(id);
+                
                 
                             $.ajax({
                                 url : "/product/"+ id + "/edit",
@@ -201,6 +212,7 @@
                                     $("#product_name").val(data.product_name);
                                     $("#product_price").val(data.product_price);
                                     $("#old_image").attr('src', data.product_image);
+                                    $("#prev_image").val(data.product_image);
                                     $(".saveBtn").text('Update');
                                     $(".modal-title").text('Update Product');
                                 }

@@ -68,8 +68,8 @@
             $(document).on('click', '.delete', function(){
                 let id = $(this).data('id');
                 swal({
-                        title: `Do you want to delete this record?`,
-                        text: "If you delete this, it will be gone forever.",
+                        title: `Do you want to delete this category?`,
+                        text: "If you delete this, then will be remove all products under this category",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,

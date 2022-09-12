@@ -4,13 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 
-// Route::get('/', function () {
-//     return view('admin.home');
-// })->middleware('auth');
+
+Route::get('/', [ProductController::class, 'getCategoryWithProducts']);
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('category', CategoryController::class)->except(['create', 'show']);
 Route::get('/category/destroy/{id}', [CategoryController::class, 'destroy']);

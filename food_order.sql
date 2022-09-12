@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2022 at 06:25 AM
+-- Generation Time: Sep 12, 2022 at 10:37 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -39,11 +39,12 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `category_name`, `created_at`, `updated_at`) VALUES
-(1, 'Mobiles', NULL, NULL),
 (2, 'Desktop', NULL, NULL),
 (3, 'Laptop', NULL, NULL),
 (4, 'Accessories', NULL, NULL),
-(9, 'Baby Food', NULL, NULL);
+(10, 'Mobile', NULL, NULL),
+(12, 'Baby Food', NULL, NULL),
+(13, 'Refrigerator', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -136,8 +137,14 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `product_name`, `product_price`, `product_image`, `created_at`, `updated_at`) VALUES
-(1, 3, 'HP Laptop', 50000.00, 'http://127.0.0.1:8000/storage/QRCode.png', NULL, NULL),
-(14, 9, 'Lactogen 4 180gm', 245.00, 'http://127.0.0.1:8000/storage/XwgVVhYAqq4OAJWcGHfWtO8z1whcpmloVjROyzcb.png', NULL, NULL);
+(45, 12, 'Lactogen 1 180gm', 245.00, 'http://127.0.0.1:8000/storage/hm8sP2JuGKEZcUcPExCfTFWgpZLjAMZZQixrx04w.jpg', NULL, NULL),
+(46, 3, 'HP Laptop Hi Configuration', 50000.00, 'http://127.0.0.1:8000/storage/sHLdYWiiiGQZEFplFOAvdPsaOWHJ8o7l0rl2SFsF.jpg', NULL, NULL),
+(47, 12, 'Lactogen 2 180gm', 245.00, 'http://127.0.0.1:8000/storage/dshnLfZSqw6IACGPe8G4IP2G0v5Mu8ghazlBv34x.jpg', NULL, NULL),
+(48, 12, 'Lactogen 3 180gm', 245.00, 'http://127.0.0.1:8000/storage/1HWjOyLckKH6TeULJRei3x5KfkR5lxaXxc76atEH.jpg', NULL, NULL),
+(49, 12, 'Lactogen 4 180gm', 226.00, 'http://127.0.0.1:8000/storage/7Sqn8YngFp0MlgHkSTeY4gvMKG3xW2gdkUZudIIt.jpg', NULL, NULL),
+(50, 10, 'Xiaomi Redmi Note 10 Pro', 25000.00, 'http://127.0.0.1:8000/storage/2qjcBaxHegJ49tviJHJaKBEjEkCpNRpoEO4Y7Yre.jpg', NULL, NULL),
+(51, 10, 'Xiaomi Redmi Note 9 Pro', 22000.00, 'http://127.0.0.1:8000/storage/y0WrFMI8eMVyijQFs8q7orj2BtmXLx17rxxLXQwJ.jpg', NULL, NULL),
+(52, 13, 'Singer Refrigerator', 35000.00, 'http://127.0.0.1:8000/storage/8AirVCLVPFnv6jxlgUc71EgqoQNViuYkL8Cmp7nx.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -162,7 +169,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (3, 'Md Anwar Hossain', 'anwar@gmail.com', NULL, '$2y$10$7lFEH1wjFL1kZTUg2Li98.43oUPN.dk6eib28xDJiDF97tRXcrDby', NULL, '2022-09-11 05:28:13', '2022-09-11 05:28:13'),
-(4, 'Md Anwar Hossain', 'anwar20@gmail.com', NULL, '$2y$10$KH6AHlr7GcFycI7SrvImwu.6vm/pB3mVlI54n544oVkaZyxB/ypnG', NULL, '2022-09-11 05:32:40', '2022-09-11 05:32:40');
+(4, 'Md Anwar Hossain', 'anwar20@gmail.com', NULL, '$2y$10$KH6AHlr7GcFycI7SrvImwu.6vm/pB3mVlI54n544oVkaZyxB/ypnG', NULL, '2022-09-11 05:32:40', '2022-09-11 05:32:40'),
+(5, 'Md Anwar Hossain', 'anwar2@gmail.com', NULL, '$2y$10$a1K/4knGfKJPLc3y8kHkZ.kP3r1w5LV1RxVDeoJveTPELGUK//O1q', NULL, '2022-09-12 01:13:15', '2022-09-12 01:13:15');
 
 --
 -- Indexes for dumped tables
@@ -224,7 +232,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -248,13 +256,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

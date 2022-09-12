@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use Datatables, Validator;
+use Datatables, Validator, Storage;
 class CategoryController extends Controller
 {
 
@@ -112,7 +113,17 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $products = Product::where('category_id', $id)->get();
+        foreach($products as $product)
+        {
+            if($product->product_image)
+            {
+                $image_name = explode('/', $product->product_image)[4];
+                Storage::delete("public/".$image_name);
+            }
+        }
         Category::findOrFail($id)->delete();
+        
         return response()->json(['success' => 'Category has been deleted']);
     }
 }

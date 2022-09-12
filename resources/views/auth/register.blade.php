@@ -35,7 +35,7 @@
 					<i class="icon_mail_alt"></i>
 				</div>
 				<div class="form-group">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -45,12 +45,12 @@
 					<i class="icon_lock_alt"></i>
 				</div>
 				<div class="form-group">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+                <input type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
 					<i class="icon_lock_alt"></i>
 				</div>
 				<div id="pass-info" class="clearfix"></div>
                 <button type="submit" class="btn_1 gradient full-width">
-                                    Register Now!
+                            {{ __('Register Now!') }}
                 </button>
 				<div class="text-center mt-2"><small>Already have an acccount? <strong><a href="{{route('login')}}">Sign In</a></strong></small></div>
 			</form>
