@@ -52,7 +52,12 @@
                 @foreach($categories as $category)
                     <div class='item_version_2'><a href='#'>
                             <figure>
-                                <span>98</span>
+                                <span>
+                                    @php
+                                        $total_product =  App\Models\Product::where('category_id', $category->id)->count();
+                                        echo $total_product;
+                                    @endphp
+                                </span>
                                 <img src='frontend/img/home_cat_placeholder.jpg' data-src='frontend/img/home_cat_pizza.jpg' alt='' class='owl-lazy' width='350' height='450'>
                                 <div class='info'>
                                     <h3>{{$category->category_name}}</h3>
